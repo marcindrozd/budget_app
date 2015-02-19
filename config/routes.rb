@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'accounts#index'
 
-  resources :accounts, only: [:show, :edit, :update] do
+  get '/login', to: "sessions#new"
+  post '/login', to: "sessions#create"
+  delete '/logout', to: "sessions#destroy"
+  get '/register', to: "users#new"
+
+  resources :accounts do
     resources :expenses do
       member do
         get 'done'
@@ -10,4 +15,6 @@ Rails.application.routes.draw do
 
     post '/change_month', to: "accounts#change_month"
   end
+
+  resources :users, only: [:create, :show, :update, :edit]
 end

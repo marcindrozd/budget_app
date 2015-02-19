@@ -1,10 +1,7 @@
-<h1>Edit the total amount</h1>
+<h1>Edit the account</h1>
 
 <%= render 'shared/error_messages', obj: @account %>
 
-<%= form_for @account do |f| %>
-  <%= f.label :total %>
-  <%= f.text_field :total %>
-  <br />
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
+
+<%= link_to "Delete this account", @account, method: :delete, data: { confirm: "Are you sure"} %>

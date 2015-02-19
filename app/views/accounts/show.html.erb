@@ -11,6 +11,7 @@
 Total monthly amount available: <strong><%= @account.total %></strong>
 <%= link_to 'Edit monthly amount', edit_account_path(@account) %>
 <br/>
+Left at the end of the month: <%= money_left(@account, @display_month) %>
 
 <h3>List of monthly expenses</h3>
 
@@ -19,7 +20,7 @@ Total monthly amount available: <strong><%= @account.total %></strong>
   <li>
     <%= "#{expense.name} - #{expense.amount} - #{expense.due_date.day}/#{expense.due_date.mon}" %> 
     [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]
-    [<%= link_to 'Done', done_account_expense_path(@account, expense) %>]
+    [<%= link_to 'Done', done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } %>]
   </li>
 <% end %>
 </ul>
