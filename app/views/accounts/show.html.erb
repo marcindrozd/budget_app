@@ -1,0 +1,17 @@
+<h1>Displaying Account <%= @account.name %></h1>
+
+<h2><%= @display_month %></h2>
+
+Total monthly amount available: <strong><%= @account.total %></strong>
+<%= link_to 'Edit monthly amount', edit_account_path(@account) %>
+<br/>
+
+<h3>List of monthly expenses</h3>
+
+<ul>
+<% @expenses.each do |expense| %>
+  <li><%= "#{expense.name} - #{expense.amount}" %> [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]</li>
+<% end %>
+</ul>
+
+<%= link_to 'Add expense', new_account_expense_path(@account) %>

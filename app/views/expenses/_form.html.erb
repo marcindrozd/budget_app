@@ -1,0 +1,17 @@
+<%= form_for [@account, @expense], as: :expense_form do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br />
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+  <br />
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+  <br />
+  <%= f.label :recurrence %>
+  <%= f.select :recurrence do %>
+    <%= options_for_select(months_array) %>
+  <% end %>
+  <br />
+  <%= f.submit %>
+<% end %>
