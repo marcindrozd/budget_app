@@ -33,6 +33,14 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    @account = Account.find(params[:account_id])
+    @expense = Expense.find(params[:id])
+    @expense.destroy
+
+    redirect_to account_path(@account)
+  end
+
   private
 
   def expense_params

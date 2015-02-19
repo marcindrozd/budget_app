@@ -3,3 +3,5 @@
 <%= render 'shared/error_messages', obj: @expense %>
 
 <%= render 'form' %>
+
+<%= link_to "Delete", [@account, @expense], method: :delete, data: { confirm: "Are you sure?" } %>
