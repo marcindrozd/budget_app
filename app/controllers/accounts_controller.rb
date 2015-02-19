@@ -6,9 +6,9 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id]) # change to currently logged_in user id
-    @display_month = Date.today.strftime("%B")
-    numeric_month = Month.find_by(name: @display_month).id # extract to app_controller and make database independent
-    @expenses = @account.expenses.where(month_id: numeric_month)
+    @display_month = display_month(params[:change_month]) || Date.today.strftime("%B")
+    @month_number = numeric_month(@display_month) # extract to app_controller and make database independent
+    @expenses = @account.expenses.where(month_id: @month_number)
   end
 
   def edit
@@ -24,6 +24,12 @@ class AccountsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def change_month
+    display_month(params[:change_month])
+
+    redirect_to :show
   end
 
   private

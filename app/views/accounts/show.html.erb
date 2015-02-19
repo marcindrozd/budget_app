@@ -1,6 +1,12 @@
 <h1>Displaying Account <%= @account.name %></h1>
 
 <h2><%= @display_month %></h2>
+<%= form_tag("/accounts/#{@account.id}", method: "get") do %>
+  <%= label_tag(:change_month, "Select Month") %>
+  <%= select_tag(:change_month, options_for_select(months_array)) %>
+  <%= submit_tag("Change Month") %>
+<% end %>
+
 
 Total monthly amount available: <strong><%= @account.total %></strong>
 <%= link_to 'Edit monthly amount', edit_account_path(@account) %>
