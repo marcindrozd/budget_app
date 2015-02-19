@@ -16,7 +16,11 @@ Total monthly amount available: <strong><%= @account.total %></strong>
 
 <ul>
 <% @expenses.each do |expense| %>
-  <li><%= "#{expense.name} - #{expense.amount} - #{expense.due_date.day}/#{expense.due_date.mon}" %> [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]</li>
+  <li>
+    <%= "#{expense.name} - #{expense.amount} - #{expense.due_date.day}/#{expense.due_date.mon}" %> 
+    [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]
+    [<%= link_to 'Done', done_account_expense_path(@account, expense) %>]
+  </li>
 <% end %>
 </ul>
 
