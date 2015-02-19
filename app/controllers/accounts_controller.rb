@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id]) # change to currently logged_in user id
     @display_month = display_month(params[:change_month]) || Date.today.strftime("%B")
     @month_number = numeric_month(@display_month) # extract to app_controller and make database independent
-    @expenses = @account.expenses.where(month_id: @month_number).order(due_date: :asc)
+    @expenses = @account.expenses.where(month_id: @month_number).order(:paid, :due_date)
   end
 
   def edit

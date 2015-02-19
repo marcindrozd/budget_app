@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219142545) do
+ActiveRecord::Schema.define(version: 20150219183339) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150219142545) do
     t.integer  "account_id"
     t.datetime "due_date"
     t.integer  "month_id"
-    t.boolean  "paid"
+    t.boolean  "paid",       default: false
     t.string   "related_to"
   end
 
