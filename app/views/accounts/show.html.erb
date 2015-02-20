@@ -3,7 +3,8 @@
 <h2><%= @display_month %></h2>
 <%= form_tag("/accounts/#{@account.id}", method: "get") do %>
   <%= label_tag(:change_month, "Select Month") %>
-  <%= select_tag(:change_month, options_for_select(months_array)) %>
+  <!--<%= select_tag(:change_month, options_for_select(months_array)) %>-->
+  <%= select_month(numeric_month(@display_month), {}, name: 'change_month') %>
   <%= submit_tag("Change Month") %>
 <% end %>
 
@@ -18,7 +19,7 @@ Left at the end of the month: <%= money_left(@account, @display_month) %>
 <ul>
 <% @expenses.each do |expense| %>
   <li>
-    <%= "#{expense.name} - #{expense.amount} - #{expense.due_date.day}/#{expense.due_date.mon}" %> 
+    <%= "#{expense.name} - #{expense.amount} - #{expense.due_date.day}" %> 
     [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]
     [<%= link_to 'Done', done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } %>]
   </li>
