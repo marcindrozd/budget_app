@@ -1,4 +1,4 @@
-<h1>Displaying Account <%= @account.name %></h1>
+<%= render 'shared/content_header', title: "Account: #{@account.name}" %>
 
 <h2><%= @display_month %></h2>
 <%= form_tag("/accounts/#{@account.id}", method: "get") do %>

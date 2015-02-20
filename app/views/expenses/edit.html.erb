@@ -1,4 +1,4 @@
-<h1>Edit expense: <%= @expense.name %></h1>
+<%= render 'shared/content_header', title: "Edit expense: #{@expense.name}" %>
 
 <%= render 'shared/error_messages', obj: @expense %>
 
