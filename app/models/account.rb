@@ -3,4 +3,5 @@ class Account < ActiveRecord::Base
   has_many :expenses
 
   validates :total, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :currency, presence: :true
 end

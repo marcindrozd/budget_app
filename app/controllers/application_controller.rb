@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :money_left, :current_user, :logged_in?, :numeric_month
+  helper_method :money_left, :current_user, :logged_in?, :numeric_month, :account_currency
 
   MONTHS_TO_WORD = {'1' => 'January', '2' => 'February', '3' => 'March', '4' => 'April', '5' => 'May', '6' => 'June',
             '7' => 'July', '8' => 'August', '9' => 'September', '10' => 'October', '11' => 'November', '12' => 'December'}
@@ -48,5 +48,9 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You cannot do that"
       redirect_to accounts_path
     end
+  end
+
+  def account_currency
+    @account_currency ||= Account.find(params[:id]).currency
   end
 end
