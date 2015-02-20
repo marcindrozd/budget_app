@@ -42,4 +42,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def require_owner
+    if current_user != @account.user
+      flash[:error] = "You cannot do that"
+      redirect_to accounts_path
+    end
+  end
 end

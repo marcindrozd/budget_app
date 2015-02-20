@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Hello #{user.username}! You are logged in!"
-      redirect_to root_path
+      redirect_to accounts_path
     else
       flash[:error] = "There is something wrong with either username or password"
       render :new

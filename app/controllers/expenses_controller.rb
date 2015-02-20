@@ -1,13 +1,14 @@
 class ExpensesController < ApplicationController
+  before_action :require_user
+  before_action :set_account
+  before_action :set_expense, only: [:edit, :update, :done, :destroy]
+  before_action :require_owner, only: [:edit, :update, :done, :destroy]
 
   def new
-    @account = Account.find(params[:account_id])
-    @expense = Expense.new
+    @expense = @account.expenses.new
   end
 
   def create
-    @account = Account.find(params[:account_id])
-
     if create_expenses
       flash[:notice] = "Expense created successfully"
       redirect_to account_path(@account)
@@ -17,15 +18,10 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    @account = Account.find(params[:account_id])
-    @expense = Expense.find(params[:id])
   end
 
   def update
-    @account = Account.find(params[:account_id])
-    @expense = Expense.find(params[:id])
-
-    if @expense.udpate(expense_params)
+    if @expense.update(expense_params)
       flash[:notice] = "Expense updated successfully"
       redirect_to account_path(@account)
     else
@@ -34,8 +30,6 @@ class ExpensesController < ApplicationController
   end
 
   def done
-    @account = Account.find(params[:account_id])
-    @expense = @account.expenses.find(params[:id])
     @expense.paid = true
     @expense.save
 
@@ -43,8 +37,6 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    @account = Account.find(params[:account_id])
-    @expense = Expense.find(params[:id])
     @expense.destroy
 
     redirect_to account_path(@account)
@@ -78,5 +70,15 @@ class ExpensesController < ApplicationController
       @expense.save
     end
     @expense.valid?
+  end
+
+  private
+
+  def set_account
+    @account = current_user.accounts.find(params[:account_id])
+  end
+
+  def set_expense
+    @expense = @account.expenses.find(params[:id])
   end
 end

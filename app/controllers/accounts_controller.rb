@@ -61,12 +61,4 @@ class AccountsController < ApplicationController
   def set_account
     @account = Account.find(params[:id])
   end
-
-  def require_owner
-    if current_user != @account.user
-      flash[:error] = "You cannot do that"
-      redirect_to root_path
-    end
-  end
-
 end
