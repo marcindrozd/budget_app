@@ -1,9 +1,19 @@
-<h1>Welcome to Budget App</h1>
+<div class="jumbotron">
+  <h1>Welcome to Budget App</h1>
 
-Already have an account?
-<%= link_to "Log in here", login_path %>
-<br />
-<br />
+  <p class="text-left">
+    Nobody likes paying bills, but we all have to do it. This application can be used to track your monthly expenses, show those that are overdue (or close to it) and allows to mark those that you have already paid.
+  </p>
+  <p class="text-left">
+    The best part is that it also shows you how much money from your budget you will have left at the end of the month once all those terrible bills are paid. This is what you can spend on something nice and shiny...
+  </p>
+  <p class="text-left">
+    What are you waiting for?
+  </p>
 
-Would you like to register?
-<%= link_to "Click here", register_path %>
+  <p>
+    <%= link_to "Log in", login_path, class: "btn btn-primary btn-lg", role: "button" %>
+    or
+    <%= link_to "Register", register_path, class: "btn btn-primary btn-lg", role: "button" %>
+  </p>
+</div>
