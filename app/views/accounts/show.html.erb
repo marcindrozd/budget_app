@@ -38,12 +38,18 @@
       </thead>
       <tbody>
         <% @expenses.each do |expense| %>
-        <tr class=<%= add_table_class(expense) %>>
-          <td><%= expense.name %></td>
-          <td><%= "#{expense.amount} #{account_currency}" %></td>
-          <td><%= expense.due_date.day %></td>
-          <td>[<%= link_to 'Done', done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } %>]</td>
-        </tr>
+          <tr class=<%= add_table_class(expense) %>>
+            <td><%= link_to expense.name, edit_account_expense_path(@account, expense) %></td>
+            <td><%= "#{expense.amount} #{account_currency}" %></td>
+            <td><%= expense.due_date.day %></td>
+            <td>
+              <% if !expense.paid %>
+                <%= link_to done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } do %>
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

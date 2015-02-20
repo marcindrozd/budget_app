@@ -7,13 +7,11 @@ Rails.application.routes.draw do
   get '/register', to: "users#new"
 
   resources :accounts do
-    resources :expenses do
+    resources :expenses, except: [:show] do
       member do
         get 'done'
       end
     end
-
-    post '/change_month', to: "accounts#change_month"
   end
 
   resources :users, only: [:create, :show, :update, :edit]
