@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219202602) do
+ActiveRecord::Schema.define(version: 20150220120854) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -32,25 +32,6 @@ ActiveRecord::Schema.define(version: 20150219202602) do
     t.integer  "month_id"
     t.boolean  "paid",       default: false
     t.string   "related_to"
-  end
-
-  create_table "monthly_budgets", force: :cascade do |t|
-    t.integer  "total"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "months", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "recurrences", force: :cascade do |t|
-    t.string   "frequency"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "expense_id"
   end
 
   create_table "users", force: :cascade do |t|
