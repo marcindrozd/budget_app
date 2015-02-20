@@ -1,12 +1,6 @@
-<%= form_for @account do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br />
-  <%= f.label :total %>
-  <%= f.text_field :total %>
-  <br />
-  <%= f.label :currency %>
-  <%= f.text_field :currency %>
-  <br />
+<%= bootstrap_form_for @account, layout: :horizontal, label_col: "col-sm-2 col-sm-offset-1", control_col: "col-sm-6" do |f| %>
+  <%= f.text_field :name, placeholder: "Year or other friendly name" %>
+  <%= f.text_field :total, placeholder: "Total budget per month" %>
+  <%= f.text_field :currency, placeholder: 'e.g. EUR or USD' %>
   <%= f.submit %>
 <% end %>

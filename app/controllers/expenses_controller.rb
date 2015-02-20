@@ -58,9 +58,12 @@ class ExpensesController < ApplicationController
       @expense.month_id = @expense.due_date.mon
       @expense.save 
       start_month = @expense.due_date.mon + step
+      number_of_months = step
       (start_month..12).step(step).each do |month|
         @expense = @account.expenses.new(expense_params)
         @expense.month_id = month
+        @expense.due_date = @expense.due_date.to_date >> number_of_months
+        number_of_months += step
         @expense.related_to = expense_id || @expense.id
         @expense.save
         expense_id ||= @expense.id

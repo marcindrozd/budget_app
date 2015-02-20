@@ -1,11 +1,7 @@
 <%= render 'shared/content_header', title: "Register" %>
 
-<%= form_for @user do |f| %>
-  <%= f.label :username %>
+<%= bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-2 col-sm-offset-1", control_col: "col-sm-6" do |f| %>
   <%= f.text_field :username %>
-  <br />
-  <%= f.label :password %>
   <%= f.password_field :password %>
-  <br />
   <%= f.submit %>
 <% end %>

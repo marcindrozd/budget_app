@@ -1,7 +1,5 @@
 <%= render 'shared/content_header', title: "Editing account: #{@account.name}" %>
 
-<%= render 'shared/error_messages', obj: @account %>
-
 <%= render 'form' %>
 
 <%= link_to "Delete this account", @account, method: :delete, data: { confirm: "Are you sure"} %>

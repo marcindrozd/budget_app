@@ -1,12 +1,7 @@
 <% if logged_in? %>
   <%= render 'shared/content_header', title: "List of your accounts:" %>
 
-  <%= link_to "Logout", logout_path, method: :delete, data: { confirm: "Are you sure?" } %><br />
-
   <% @accounts.each do |account| %>
-    <%= link_to account.name, account_path(account) %> [<%= link_to "Edit", edit_account_path(account) %>]
-    <br />
+    <h3><%= link_to account.name, account_path(account) %> <small>[<%= link_to "Edit", edit_account_path(account) %>]</small></h3>
   <% end %>
-
-  <%= link_to "New Account", new_account_path %>
 <% end %>

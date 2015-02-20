@@ -1,28 +1,53 @@
 <%= render 'shared/content_header', title: "Account: #{@account.name}" %>
 
-<h2><%= @display_month %></h2>
-<%= form_tag("/accounts/#{@account.id}", method: "get") do %>
-  <%= label_tag(:change_month, "Select Month") %>
-  <%= select_month(numeric_month(@display_month), {}, name: 'change_month') %>
-  <%= submit_tag("Change Month") %>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <div class="well">
+      <h4>Showing month: <strong><%= @display_month %></strong></h4>
 
+    Total monthly budget: <strong><%= @account.total %> <%= account_currency %></strong>
+    [<%= link_to 'Edit', edit_account_path(@account) %>]
+    <br/>
+    Left after bills paid: <%= money_left(@account, @display_month) %> <%= account_currency %>
+  </div>
+  </div>
 
-Total monthly amount available: <strong><%= @account.total %> <%= account_currency %></strong>
-<%= link_to 'Edit monthly amount', edit_account_path(@account) %>
-<br/>
-Left at the end of the month: <%= money_left(@account, @display_month) %> <%= account_currency %>
+  <div class="col-md-3">
+    <div class="well">
+      <%= form_tag("/accounts/#{@account.id}", method: "get") do %>
+        <%= label_tag(:change_month, "Switch Month") %>
+        <%= select_month(numeric_month(@display_month), {}, name: 'change_month', class: "form-control input-sm") %>
+        <%= submit_tag("OK", class: "btn btn-default") %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <h3>List of monthly expenses</h3>
 
-<ul>
-<% @expenses.each do |expense| %>
-  <li>
-    <%= "#{expense.name} - #{expense.amount} #{account_currency} - #{expense.due_date.day}" %>
-    [<%= link_to 'Edit', edit_account_expense_path(@account, expense) %>]
-    [<%= link_to 'Done', done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } %>]
-  </li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of the expense</th>
+          <th>Amount of money</th>
+          <th>Payment due day</th>
+          <th>Mark as paid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @expenses.each do |expense| %>
+        <tr class=<%= add_table_class(expense) %>>
+          <td><%= expense.name %></td>
+          <td><%= "#{expense.amount} #{account_currency}" %></td>
+          <td><%= expense.due_date.day %></td>
+          <td>[<%= link_to 'Done', done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } %>]</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%= link_to 'Add expense', new_account_expense_path(@account) %>

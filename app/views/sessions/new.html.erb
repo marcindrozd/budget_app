@@ -1,21 +1,7 @@
 <%= render 'shared/content_header', title: "Log in" %>
 
-<%= form_for(:session, url: login_path, html: { class: "form-horizontal" }) do |f| %>
-  <div class="form-group">
-    <%= f.label :username, class: "col-sm-2 control-label col-sm-offset-2" %>
-    <div class="col-sm-4">
-      <%= f.text_field :username, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :password, class: "col-sm-2 control-label col-sm-offset-2" %>
-    <div class="col-sm-4">
-      <%= f.password_field :password, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-4 col-sm-4">
-      <%= f.submit "Log in", class: "btn btn-default" %>
-    </div>
-  </div>
+<%= bootstrap_form_for(:session, url: login_path, layout: :horizontal, label_col: "col-sm-2 col-sm-offset-1", control_col: "col-sm-6") do |f| %>
+  <%= f.text_field :username %>
+  <%= f.password_field :password %>
+  <%= f.submit "Log in" %>
 <% end %>
