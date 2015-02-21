@@ -15,3 +15,21 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+
+#overdue {
+  color: #f2dede;
+}
+
+#due-tomorrow {
+  color: #fcf8e3;
+}
+
+#paid {
+  color: #dff0d8;
+}
+
+.well .key_table {
+  background: #aaa;
+  color: #ddd;
+  text-align: center;
+}

@@ -5,16 +5,25 @@
     <div class="well">
       <h4>Showing month: <strong><%= @display_month %></strong></h4>
 
-    Total monthly budget: <strong><%= @account.total %> <%= account_currency %></strong>
-    [<%= link_to 'Edit', edit_account_path(@account) %>]
-    <br/>
-    Left after bills paid: <%= money_left(@account, @display_month) %> <%= account_currency %>
-  </div>
+      Total monthly budget: <strong><%= @account.total %> <%= account_currency %></strong>
+      [<%= link_to 'Edit', edit_account_path(@account) %>]
+      <br/>
+      Left after bills paid: <%= money_left(@account, @display_month) %> <%= account_currency %>
+      <br/>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="well-sm key_table">
+            Key: <br/>
+            <span id="overdue">Overdue</span> / <span id="due-tomorrow">Due tomorrow</span> / <span id="paid">Paid</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-3">
     <div class="well">
-      <%= form_tag("/accounts/#{@account.id}", method: "get") do %>
+      <%= form_tag("/accounts/#{@account.slug}", method: "get") do %>
         <%= label_tag(:change_month, "Switch Month") %>
         <%= select_month(numeric_month(@display_month), {}, name: 'change_month', class: "form-control input-sm") %>
         <%= submit_tag("OK", class: "btn btn-default") %>
