@@ -51,6 +51,6 @@ class ApplicationController < ActionController::Base
   end
 
   def account_currency
-    @account_currency ||= Account.find(params[:id]).currency
+    @account_currency ||= Account.find_by(slug: params[:id]).currency
   end
 end

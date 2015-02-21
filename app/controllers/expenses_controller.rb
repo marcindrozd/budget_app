@@ -83,7 +83,7 @@ class ExpensesController < ApplicationController
   private
 
   def set_account
-    @account = current_user.accounts.find(params[:account_id])
+    @account = current_user.accounts.find_by(slug: params[:account_id])
   end
 
   def set_expense

@@ -59,6 +59,6 @@ class AccountsController < ApplicationController
   end
 
   def set_account
-    @account = Account.find(params[:id])
+    @account = Account.find_by(slug: params[:id])
   end
 end
