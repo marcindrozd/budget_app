@@ -33,7 +33,12 @@ class ExpensesController < ApplicationController
     @expense.paid = true
     @expense.save
 
-    redirect_to account_path(@account)
+    respond_to do |format|
+      format.html do
+        redirect_to account_path(@account)
+      end
+      format.js
+    end
   end
 
   def destroy

@@ -1,7 +1,7 @@
 <%= render 'shared/content_header', title: "Account: #{@account.name}" %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-1">
+  <div class="col-md-7 col-md-offset-1">
     <div class="well">
       <h4>Showing month: <strong><%= @display_month %></strong></h4>
 
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<h3>List of monthly expenses</h3>
+<h4>List of monthly expenses <small>[<%= link_to '+ Add new one', new_account_expense_path(@account) %>]</small></h4>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -38,13 +38,13 @@
       </thead>
       <tbody>
         <% @expenses.each do |expense| %>
-          <tr class=<%= add_table_class(expense) %>>
+          <tr id="expense_<%= expense.id %>" class=<%= add_table_class(expense) %>>
             <td><%= link_to expense.name, edit_account_expense_path(@account, expense) %></td>
             <td><%= "#{expense.amount} #{account_currency}" %></td>
             <td><%= expense.due_date.day %></td>
             <td>
               <% if !expense.paid %>
-                <%= link_to done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" } do %>
+                <%= link_to done_account_expense_path(@account, expense), data: { confirm: "Are you sure?" }, remote: true do %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% end %>
               <% end %>
@@ -55,5 +55,3 @@
     </table>
   </div>
 </div>
-
-<%= link_to 'Add expense', new_account_expense_path(@account) %>
